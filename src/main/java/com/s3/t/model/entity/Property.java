@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @NoArgsConstructor
 @Getter @Setter
@@ -28,4 +29,6 @@ public class Property {
         this.location = location;
         this.price = price;
     }
+
+    
 }
