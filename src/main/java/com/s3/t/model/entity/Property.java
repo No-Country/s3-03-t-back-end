@@ -20,10 +20,12 @@ public class Property {
     private String direction;
     @ManyToOne(fetch = FetchType.LAZY)
     private Location location;
+    private Double price;
 
-    public Property(String description, String direction, Location location) {
+    public Property(String description, String direction, Location location, double price) {
         this.description = description;
         this.direction = direction;
         this.location = location;
+        this.price = price;
     }
 }
