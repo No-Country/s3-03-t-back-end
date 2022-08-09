@@ -1,6 +1,23 @@
 package com.s3.t.util;
 
-public class RolesEnum {
-    public static final String USER_ADMIN = "USER_ADMIN";
-    public static final String ROOM_USER = "ROOM_USER";
+public enum RolesEnum {
+    USER("USER"),
+    ROOMIE("ROOMIE"),
+    TENAT("TENAT");
+
+    private String ROLE_PREFIX ="ROLE_";
+    private final String name ;
+
+    RolesEnum(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+    public String getFullRoleName()
+    {
+        return ROLE_PREFIX + name;
+
+    }
 }
