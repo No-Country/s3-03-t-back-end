@@ -28,4 +28,5 @@ public class Property {
         this.location = location;
         this.price = price;
     }
+
 }
