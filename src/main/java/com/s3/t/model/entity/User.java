@@ -9,6 +9,7 @@ import net.bytebuddy.asm.Advice;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -23,6 +24,10 @@ public class User {
     private String lastName ;
     @Email
     private String email;
+
+    @NotBlank(message = "Password is requerid")
+    @Size(min=8,max=250, message = "password should have at least 8 characters")
+    private String password;
     @NotBlank(message = "Address is required")
     private String  Address;
     @NotBlank(message = "Telephone is required")
