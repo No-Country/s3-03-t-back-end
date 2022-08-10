@@ -1,10 +1,16 @@
 package com.s3.t.model.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+@NoArgsConstructor
+@Getter @Setter
 @Entity
 @Table(name = "users")
 public class User {
@@ -38,63 +44,19 @@ public class User {
 
     */
 
-    public User() {
-    }
+    public User(Long id, String firstName, String lastName,
+                String email, String dni, String password,
+                String address, String telephone, String birth) {
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getAddress() {
-        return Address;
-    }
-
-    public void setAddress(String address) {
+        this.dni = dni;
+        this.password = password;
         Address = address;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
         this.telephone = telephone;
-    }
-
-    public String getBirth() {
-        return birth;
-    }
-
-    public void setBirth(String birth) {
         this.birth = birth;
-    }
 
+    }
 }
