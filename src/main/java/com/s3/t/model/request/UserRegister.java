@@ -1,14 +1,18 @@
 package com.s3.t.model.request;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
+@Getter
+@Setter
 @Data
-public class UserRequest implements Serializable {
+public class UserRegister implements Serializable {
     @NotBlank(message = "First Name Required")
     private final String firstName;
     @NotBlank(message = "Last name Required")
@@ -26,4 +30,21 @@ public class UserRequest implements Serializable {
     private final String telephone;
     @NotBlank(message = "Birth is required")
     private final String birth;
+    
+    
+
+    public UserRegister(String firstName, String lastName,
+                        String email, String dni, 
+                        String password,
+                        String address,
+                        String telephone, String birth) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.dni = dni;
+        this.password = password;
+        Address = address;
+        this.telephone = telephone;
+        this.birth = birth;
+    }
 }

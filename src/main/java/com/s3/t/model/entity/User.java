@@ -25,6 +25,9 @@ public class User {
     @Email
     private String email;
 
+    @NotBlank(message = "DNI is requerid")
+    private String dni;
+
     @NotBlank(message = "Password is requerid")
     @Size(min=8,max=250, message = "password should have at least 8 characters")
     private String password;
