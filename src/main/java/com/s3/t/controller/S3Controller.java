@@ -1,5 +1,6 @@
 package com.s3.t.controller;
 
+import com.s3.t.model.entity.IImage;
 import com.s3.t.service.impl.S3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,11 @@ public class S3Controller {
     private S3Service s3Service;
 
     @PostMapping("/upload")
-    Map<String, String> upload(@RequestParam MultipartFile file){
-        String key=s3Service.sendObject(file);
+    Map<String, String> uploadS3(@RequestParam IImage file){
+        String key=s3Service.upload(file);
         Map<String,String> result=new HashMap<>();
         result.put("key",key);
-        result.put("url",s3Service.getObjectUrl(key));
+       /* result.put("url",s3Service.getObjectUrl(key));*/
         return result;
     }
 
