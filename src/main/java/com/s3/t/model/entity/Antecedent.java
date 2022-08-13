@@ -1,5 +1,7 @@
 package com.s3.t.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.s3.t.util.EnumAntecedent;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,39 +9,30 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.List;
-
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
 @Entity
-@Table(name = "property")
-public class Property {
+@Table(name = "antecedent")
+public class Antecedent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "ambient cannot be empty.")
-    private Integer ambient;
-
+    @NotBlank(message = "description cannot be empty.")
     private String description;
 
-    @NotBlank(message = "Direction cannot be empty.")
-    private String direction;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private LocalDate date;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Location location;
-
-    @NotBlank(message = "Price cannot be empty.")
-    private Double price;
+    @NotBlank(message = "Antecedent type cannot be empty.")
+    private EnumAntecedent antecedentType;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-
-    @OneToMany(mappedBy = "property")
-    private List<Contract> contracts;
 
 
 }
