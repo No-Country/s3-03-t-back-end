@@ -3,8 +3,10 @@ package com.s3.t.model.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -19,7 +21,7 @@ import java.util.stream.Collectors;
 @Getter @Setter
 @Entity
 @Table(name = "users")
-public class User {
+public class User  implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -44,21 +46,20 @@ public class User {
     @NotBlank(message = "Birth is required")
     private String birth;
 
-    /*  private String antecedent;
+    //falta atributos
 
-      private String departament;
 
-      */
+
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @Column(name = "role_id")
     private List<Role> roles;
 
-/*    @Override
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return  this.getRoles().stream().map(
                 role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 
-    }*/
+    }
 
 
     public User(Long id, String firstName, String lastName,
@@ -75,5 +76,32 @@ public class User {
         this.telephone = telephone;
         this.birth = birth;
 
+    }
+
+
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 }
