@@ -5,12 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -19,7 +23,7 @@ import java.util.List;
 @Getter @Setter
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,18 +41,20 @@ public class User {
     private String email;
 
     @NotBlank(message = "Password cannot be empty.")
-    @Size(min = 8, max = 30, message = "Password should have at least 8 characters")
+    @Size(min = 8, max = 250, message = "Password should have at least 8 characters")
     private String password;
 
     @NotBlank(message = "Telephone is required")
     private String telephone;
 
     @JsonFormat(pattern="yyyy-MM-dd")
-    @NotBlank(message = "Birth is required")
+   // @NotBlank(message = "Birth is required")
     private LocalDate birthDate;
 
     @NotBlank(message = "Dni cannot be empty.")
     private String dni;
+
+    private boolean softDeleted = false;
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
@@ -64,5 +70,33 @@ public class User {
     private List<Score> scores;
 
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.getName()));
+    }
 
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return !isSoftDeleted();
+    }
 }
