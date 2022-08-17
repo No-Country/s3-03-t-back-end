@@ -14,10 +14,16 @@ import javax.validation.Valid;
 @RequestMapping("/image")
 
 public class ImageController {
-
-    @PostMapping("/upload")
+/*    Map<String, String> uploadS3(@RequestParam IImage file){
+        String key=s3Service.upload(file);
+        Map<String,String> result=new HashMap<>();
+        result.put("key",key);
+         result.put("url",s3Service.getObjectUrl(key));
+        return result;
+    }
+  @PostMapping("/upload")
     public ResponseEntity<ImageResponse> upload(@Valid @RequestBody ImageRequest request){
         ImageResponse response = ImageService.upload(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
-    }
+    }*/
 }
