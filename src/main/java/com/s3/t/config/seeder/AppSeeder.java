@@ -1,6 +1,8 @@
 package com.s3.t.config.seeder;
 
+import com.s3.t.model.entity.Location;
 import com.s3.t.model.entity.Role;
+import com.s3.t.repository.LocationRepository;
 import com.s3.t.repository.RoleRepository;
 import com.s3.t.util.RolesEnum;
 import lombok.AllArgsConstructor;
@@ -15,6 +17,11 @@ import java.util.List;
 @Service
 public class AppSeeder {
 
+    private static final List<String> LOCATIONS = List.of("Escobar","Alberti","Azul","Berisso","La Plata","Caballito","Flores","Constitución","Palermo","Nuñez");
+    private static final String PROVINCE = "Buenos Aires";
+    private static final String COUNTRY = "Argentina";
+
+    private final LocationRepository locationRepository;
     private final RoleRepository roleRepository;
 
     @EventListener
@@ -23,7 +30,24 @@ public class AppSeeder {
         if(roles.isEmpty()){
             createRoles();
         }
+
+        createLocations();
     }
+
+    private void createLocations() {
+        if(locationRepository.count() < 10){
+            for (int i = 0; i < 10; i++){
+                Location l = new Location();
+                l.setId((long) i);
+                l.setLocation(LOCATIONS.get(i));
+                l.setProvince(PROVINCE);
+                l.setCountry(COUNTRY);
+                l.setSoftDeleted(false);
+                locationRepository.save(l);
+            }
+        }
+    }
+
     private void createRoles() {
         createRole(1L, RolesEnum.ADMIN);
         createRole(2L, RolesEnum.USER);

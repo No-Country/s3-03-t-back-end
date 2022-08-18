@@ -49,7 +49,10 @@ public class SecurityConfig {
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth/register").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth/login").permitAll()
-                .antMatchers(HttpMethod.POST,"/image/upload").permitAll()
+                
+                .antMatchers(HttpMethod.POST,"/image/upload").permitAll()                //Location
+                .antMatchers(HttpMethod.POST,"/location/save").permitAll()
+
                 // all other requests need to be authenticated
                 .anyRequest().authenticated().and()
                 // make sure we use stateless session; session won't be used to
