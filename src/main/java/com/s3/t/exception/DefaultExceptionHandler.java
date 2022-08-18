@@ -11,6 +11,15 @@ import java.util.List;
 @ControllerAdvice
 public class DefaultExceptionHandler {
 
+    @ExceptionHandler(value = EntityNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleEntityNotFound(EntityNotFoundException e){
+        ErrorResponse errorResponse = buildErrorResponse(
+                HttpStatus.NOT_FOUND,
+                "Entity not found.",
+                e.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(value = UserAlreadyExistException.class)
     public ResponseEntity<ErrorResponse> handleUserAlreadyExistException(UserAlreadyExistException e){
         ErrorResponse errorResponse = buildErrorResponse(
