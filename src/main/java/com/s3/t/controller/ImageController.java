@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 
 
 @CrossOrigin(origins = "*")
@@ -20,7 +21,7 @@ public class ImageController {
     @Autowired
     private AwsService awsService;
     @PostMapping(value = "/upload")
-    public ResponseEntity<String> uploadFile(@RequestPart(value="file") MultipartFile file) {
+    public ResponseEntity<String> uploadFile(@RequestPart(value="file") MultipartFile file) throws IOException {
         awsService.uploadFile(file);
         String response = "El archivo "+file.getOriginalFilename()+" fue cargado correctamente a S3";
         return new ResponseEntity<>(response, HttpStatus.OK);

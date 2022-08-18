@@ -39,6 +39,7 @@ public class AwsServiceImpl implements AwsService {
             //amazonAwsConfig.listMultipartUploads() investigar multi lista de archivos
             PutObjectRequest request = new PutObjectRequest(bucketName, newFileName, mainFile);
             amazonAwsConfig.putObject(request);
+            mainFile.delete();
             LOGGER.warn("URL: "+amazonAwsConfig.getUrl(bucketName,newFileName) );
         } catch (IOException e) {
             LOGGER.error(e.getMessage(), e);
