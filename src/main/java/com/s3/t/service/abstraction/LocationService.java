@@ -5,4 +5,5 @@ import com.s3.t.model.response.LocationResponse;
 
 public interface LocationService {
     LocationResponse save(LocationRequest request);
+    LocationResponse getBy(Long id);
 }
