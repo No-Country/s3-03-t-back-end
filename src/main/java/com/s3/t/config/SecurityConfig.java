@@ -52,7 +52,8 @@ public class SecurityConfig {
                 
                 .antMatchers(HttpMethod.POST,"/image/upload").permitAll()                //Location
                 .antMatchers(HttpMethod.POST,"/location/save").permitAll()
-
+                //Property
+                .antMatchers(HttpMethod.POST,"/property/add").permitAll()
                 // all other requests need to be authenticated
                 .anyRequest().authenticated().and()
                 // make sure we use stateless session; session won't be used to

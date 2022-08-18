@@ -1,10 +1,9 @@
 package com.s3.t.service;
 
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.ListObjectsV2Result;
-import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.amazonaws.services.s3.model.*;
 import com.s3.t.service.abstraction.AwsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,12 +36,18 @@ public class AwsServiceImpl implements AwsService {
             String newFileName = System.currentTimeMillis() + "_" + mainFile.getName();
             LOGGER.warn("Subiendo archivo con el nombre... " + newFileName); //info consola
             //amazonAwsConfig.listMultipartUploads() investigar multi lista de archivos
-            PutObjectRequest request = new PutObjectRequest(bucketName, newFileName, mainFile);
-            amazonAwsConfig.putObject(request);
+        try {
+            amazonAwsConfig.putObject(new PutObjectRequest(bucketName, newFileName, mainFile)
+                    .withCannedAcl(CannedAccessControlList.PublicRead));
             mainFile.delete();
-            LOGGER.warn("URL: "+amazonAwsConfig.getUrl(bucketName,newFileName) );
+            LOGGER.warn("URL: " + amazonAwsConfig.getUrl(bucketName, newFileName));
+
+        }catch (AmazonS3Exception e){
+            mainFile.delete();
+             throw new AmazonServiceException("Error: No se cargo el archivo"+ e.getMessage());
+        }
         } catch (IOException e) {
-            LOGGER.error(e.getMessage(), e);
+            throw new AmazonServiceException("Error: Conversion de archivo"+ e.getMessage());
         }
     }
     @Override

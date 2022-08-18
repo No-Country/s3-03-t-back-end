@@ -27,7 +27,7 @@ public class PropertyController {
     public final PropertyService propertyService;
 
     @ApiOperation(value = "Registration property", notes = "Returns proeprty created" )
-    @PostMapping("/addproperty")
+    @PostMapping("/add")
     public ResponseEntity<PropertyResponse> upload(
             @RequestPart(value="postimages",required=false) ArrayList<MultipartFile> postImage,
             @RequestPart (value="property", required=true) PropertyRequest request){
