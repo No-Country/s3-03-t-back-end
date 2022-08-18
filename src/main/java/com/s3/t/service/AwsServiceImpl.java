@@ -36,9 +36,10 @@ public class AwsServiceImpl implements AwsService {
             //cambiar nombre de archivo valor unico
             String newFileName = System.currentTimeMillis() + "_" + mainFile.getName();
             LOGGER.warn("Subiendo archivo con el nombre... " + newFileName); //info consola
-
+            //amazonAwsConfig.listMultipartUploads() investigar multi lista de archivos
             PutObjectRequest request = new PutObjectRequest(bucketName, newFileName, mainFile);
             amazonAwsConfig.putObject(request);
+            LOGGER.warn("URL: "+amazonAwsConfig.getUrl(bucketName,newFileName) );
         } catch (IOException e) {
             LOGGER.error(e.getMessage(), e);
         }

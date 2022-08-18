@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
+
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -25,17 +25,4 @@ public class ImageController {
         String response = "El archivo "+file.getOriginalFilename()+" fue cargado correctamente a S3";
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-/*    Map<String, String> uploadS3(@RequestParam IImage file){
-        String key=s3Service.upload(file);
-        Map<String,String> result=new HashMap<>();
-        result.put("key",key);
-         result.put("url",s3Service.getObjectUrl(key));
-        return result;
-    }
-  @PostMapping("/upload")
-    public ResponseEntity<ImageResponse> upload(@Valid @RequestBody ImageRequest request){
-        ImageResponse response = ImageService.upload(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
-    }*/
 }

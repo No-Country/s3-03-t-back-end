@@ -9,11 +9,14 @@ import com.s3.t.service.abstraction.PropertyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Request;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -24,9 +27,11 @@ public class PropertyController {
     public final PropertyService propertyService;
 
     @ApiOperation(value = "Registration property", notes = "Returns proeprty created" )
-    @PostMapping("/upload")
-    public ResponseEntity<PropertyResponse> upload(@Valid @RequestBody PropertyRequest request){
-        PropertyResponse response = propertyService.upload(request);
+    @PostMapping("/addproperty")
+    public ResponseEntity<PropertyResponse> upload(
+            @RequestPart(value="postimages",required=false) ArrayList<MultipartFile> postImage,
+            @RequestPart (value="property", required=true) PropertyRequest request){
+        PropertyResponse response = propertyService.add(postImage,request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }
