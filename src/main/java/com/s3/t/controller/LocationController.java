@@ -24,4 +24,10 @@ public class LocationController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<LocationResponse> getBy(@PathVariable Long id){
+        LocationResponse response = service.getBy(id);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
 }
