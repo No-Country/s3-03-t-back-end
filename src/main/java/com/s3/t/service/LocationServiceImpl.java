@@ -49,10 +49,9 @@ public class LocationServiceImpl implements LocationService {
         List<Location> locations = locationRepository.findByLocationOrProvince(location, province);
         List<LocationResponse> responses = new ArrayList<>();
         locations.forEach(loc -> {
-            if(loc.getSoftDeleted()){
-                throw new EntityNotFoundException("locality or province eliminated");
+            if(!loc.getSoftDeleted()){
+                responses.add(locationMapper.dtoToEntityProperty(loc));
             }
-            responses.add(locationMapper.dtoToEntityProperty(loc));
         });
         return responses;
     }

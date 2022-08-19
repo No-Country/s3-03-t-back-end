@@ -54,6 +54,7 @@ public class LocationController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @ApiOperation(value = "Update method", notes = "Returns update entity")
     @PutMapping("/{id}")
     public ResponseEntity<LocationResponse> update(@PathVariable Long id, @RequestBody LocationRequest request){
         LocationResponse response = service.update(id, request);
