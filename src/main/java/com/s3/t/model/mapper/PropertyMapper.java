@@ -1,24 +1,33 @@
 package com.s3.t.model.mapper;
 
+import com.s3.t.model.entity.Image;
 import com.s3.t.model.entity.Property;
 import com.s3.t.model.entity.User;
 import com.s3.t.model.request.PropertyRequest;
 import com.s3.t.model.response.PropertyResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class PropertyMapper {
-
+    @Autowired
+    public  ImageMapper imageMapper;
     public Property propertyToRequest(PropertyRequest request, User user) {
+
         return Property.builder()
                 .contracts(null)
                 .ambient(request.getAmbient())
                 .description(request.getDescription())
                 .direction(request.getDirection())
                 .user(user)
-                .postImages(null)
+                .postImages(new ArrayList<>())
                 .price(request.getPrice())
+                .location(null)
                 .build();
     }
     public PropertyResponse responseToProperty(Property p){
@@ -31,6 +40,9 @@ public class PropertyMapper {
                     .description(p.getDescription())
                     .direction(p.getDirection())
                     .price(p.getPrice())
+                    .imgList(p.getPostImages().stream()
+                            .map( i -> imageMapper.imageToDto(i) )
+                            .collect(Collectors.toList()))
                     .build();
         }
 

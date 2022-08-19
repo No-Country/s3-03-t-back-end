@@ -6,9 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.Base64;
 
 @Entity
 @AllArgsConstructor

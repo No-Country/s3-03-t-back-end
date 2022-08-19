@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 
 @AllArgsConstructor
 @Getter
@@ -20,4 +21,5 @@ public class PropertyResponse implements Serializable {
     private final String firtName;
     private final String lastName;
     private final String telephone;
+    private final List<ImageResponse> imgList;
 }

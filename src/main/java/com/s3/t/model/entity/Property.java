@@ -1,10 +1,12 @@
 package com.s3.t.model.entity;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 import java.util.List;
 
 
@@ -33,6 +35,8 @@ public class Property {
     @NotNull(message = "Price cannot be empty.")
     private Double price;
 
+    @CreationTimestamp
+    private Timestamp timestamp;
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 

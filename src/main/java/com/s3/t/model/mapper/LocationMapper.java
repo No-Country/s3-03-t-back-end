@@ -3,16 +3,18 @@ package com.s3.t.model.mapper;
 import com.s3.t.model.entity.Location;
 import com.s3.t.model.request.LocationRequest;
 import com.s3.t.model.response.LocationResponse;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
-@RequiredArgsConstructor
+
 @Component
 public class LocationMapper {
-
-    private final PropertyMapper propertyMapper;
+    @Autowired
+   PropertyMapper propertyMapper;
     public Location entityToDto(LocationRequest request) {
         Location location = new Location();
         location.setLocation(request.getLocation());
