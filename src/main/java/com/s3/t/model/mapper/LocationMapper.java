@@ -42,4 +42,10 @@ public class LocationMapper {
                 .collect(Collectors.toList()));
         return response;
     }
+
+    public void locationUpdate(Location location, LocationRequest request) {
+        location.setLocation(request.getLocation());
+        location.setCountry(request.getCountry());
+        location.setProvince(request.getProvince());
+    }
 }
