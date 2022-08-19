@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -19,4 +21,6 @@ public class LocationResponse {
     private String province;
 
     private String country;
+
+    private List<PropertyResponse> propertyResponseList;
 }

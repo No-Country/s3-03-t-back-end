@@ -8,7 +8,9 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @AllArgsConstructor
-@Getter @Setter @Builder
+@Getter
+@Setter
+@Builder
 public class PropertyResponse implements Serializable {
     private final Long id;
     private final Integer ambient;
