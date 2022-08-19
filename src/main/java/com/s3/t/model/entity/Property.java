@@ -1,18 +1,16 @@
 package com.s3.t.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter @Setter
+@Getter @Setter @Builder
 @Entity
 @Table(name = "property")
 public class Property {
@@ -21,7 +19,7 @@ public class Property {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "ambient cannot be empty.")
+    @NotNull(message = "ambient cannot be empty.")
     private Integer ambient;
 
     private String description;
@@ -32,7 +30,7 @@ public class Property {
     @ManyToOne(fetch = FetchType.LAZY)
     private Location location;
 
-    @NotBlank(message = "Price cannot be empty.")
+    @NotNull(message = "Price cannot be empty.")
     private Double price;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -40,6 +38,10 @@ public class Property {
 
     @OneToMany(mappedBy = "property")
     private List<Contract> contracts;
+
+    @OneToMany(cascade={CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.REFRESH})
+    @JoinColumn(name="postImages")
+    private List<Image> postImages;
 
 
 }

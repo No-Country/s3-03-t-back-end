@@ -15,4 +15,7 @@ public class PropertyResponse implements Serializable {
     private final String description;
     private final String direction;
     private final Double price;
+    private final String firtName;
+    private final String lastName;
+    private final String telephone;
 }
