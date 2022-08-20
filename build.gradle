@@ -21,11 +21,16 @@ repositories {
 
 dependencies {
 	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
-	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2'
+	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+	implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.1000')
+	implementation 'com.amazonaws:aws-java-sdk-s3'
+	implementation 'br.com.caelum.vraptor:vraptor-amazonS3:4.0.1'
+	implementation group: 'org.postgresql', name: 'postgresql', version: '42.3.6'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'br.com.caelum.vraptor:vraptor-amazonS3:4.0.1'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'

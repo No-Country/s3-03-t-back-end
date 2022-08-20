@@ -1,0 +1,12 @@
+#amazonProperties:
+# endpointUrl: "${endpointUrl}"
+# accessKey: "${accessKey}"
+# secretKey: "${secretKey}"
+# bucketName: "${bucketName}"
+# region: "${region}"
+aws:
+  bucket: s3demobucketnocountry
+  region: us-east-1
+ key:
+    access: AKIA57VKZ7QBGS6JRNFM
+    secret: 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

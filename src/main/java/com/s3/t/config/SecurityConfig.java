@@ -49,12 +49,17 @@ public class SecurityConfig {
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth/register").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth/login").permitAll()
-                //Location
+                
+                .antMatchers(HttpMethod.POST,"/image/upload").permitAll()
                 .antMatchers(HttpMethod.POST,"/location/save").permitAll()
+                //Property
+                .antMatchers(HttpMethod.POST,"/property/add").permitAll()
+                //Location
                 .antMatchers(HttpMethod.GET,"/location/{id}").permitAll()
                 .antMatchers(HttpMethod.GET,"/location/filter").permitAll()
                 .antMatchers(HttpMethod.DELETE,"/location/{id}").permitAll()
                 .antMatchers(HttpMethod.PUT,"/location/{id}").permitAll()
+
                 // all other requests need to be authenticated
                 .anyRequest().authenticated().and()
                 // make sure we use stateless session; session won't be used to
