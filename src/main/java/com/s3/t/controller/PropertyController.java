@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -24,9 +25,8 @@ public class PropertyController {
 
     @ApiOperation(value = "Registration property", notes = "Returns proeprty created" )
     @PostMapping("/add")
-    public ResponseEntity<PropertyResponse> upload(
-            @RequestPart(value="postimages",required=false) List<MultipartFile> postImage,
-            @RequestPart (value="property", required=true) PropertyRequest request){
+    public ResponseEntity<PropertyResponse> upload( @RequestPart(value="postimages",required=false) List<MultipartFile> postImage,
+           @RequestPart (value="property", required=true) PropertyRequest request){
         PropertyResponse response = propertyService.add(postImage,request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
