@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -28,34 +29,38 @@ public class AwsServiceImpl implements AwsService {
     @Value("${aws.s3.bucket}")
     private String bucketName ;
     private String newFileName="";
+
+    public String nameNewFile(MultipartFile file,File newfile){
+        try (FileOutputStream stream = new FileOutputStream(newfile)) {
+            stream.write(file.getBytes()); //multipartFile
+            newFileName = System.currentTimeMillis() + "_" + newfile.getName();
+        }catch (IOException e)
+        {   throw new RuntimeException("Error: Conversion de archivo" + e.getMessage()); }
+        return newFileName;
+    }
+
     @Override
+    @Transactional
     public Image uploadFile(MultipartFile file) {
-        File mainFile = new File(file.getOriginalFilename());
-
-
-        ///TODO:ORDENAR ESTO
-        try (FileOutputStream stream = new FileOutputStream(mainFile)) {
-            stream.write(file.getBytes());
-            //cambiar nombre de archivo valor unico
-            newFileName = System.currentTimeMillis() + "_" + mainFile.getName();
+        newFileName=nameNewFile(file,converterFile(file));
         try {
-            amazonAwsConfig.putObject(new PutObjectRequest(bucketName, newFileName, mainFile)
+            amazonAwsConfig.putObject(new PutObjectRequest(bucketName, newFileName, converterFile(file))
                     .withCannedAcl(CannedAccessControlList.PublicRead));
-            mainFile.delete();
+            converterFile(file).delete();
 
             LOGGER.warn("URL: " + amazonAwsConfig.getUrl(bucketName, newFileName));
 
         }catch (AmazonS3Exception e){
-            mainFile.delete();
-             throw new AmazonServiceException("Error: No se cargo el archivo"+ e.getMessage());
-        }
-        } catch (IOException e) {
-            throw new AmazonServiceException("Error: Conversion de archivo"+ e.getMessage());
+            converterFile(file).delete();
+             throw new AmazonServiceException("Error: No se cargo el archivo en aws"+ e.getMessage());
         }
         return Image.builder()
                 .fileName(newFileName)
                 .imageUrl(amazonAwsConfig.getUrl(bucketName, newFileName).toString())
                         .build();
+    }
+    public File converterFile(MultipartFile file){
+       return new File(file.getOriginalFilename());
     }
     @Override
     public List<String> getObjectsFromS3() {

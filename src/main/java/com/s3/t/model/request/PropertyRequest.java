@@ -1,5 +1,6 @@
 package com.s3.t.model.request;
 
+import com.s3.t.model.entity.Location;
 import lombok.*;
 import javax.validation.constraints.NotBlank;
 
@@ -15,5 +16,8 @@ public class PropertyRequest  {
     private  String direction;
     @NotBlank(message = "Price cannot be empty.")
     private  Double price;
+    @NotBlank(message = "Location cannot be empty.")
+    private Location location;
+
 
 }

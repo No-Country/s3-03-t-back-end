@@ -43,7 +43,7 @@ public class Property {
     @OneToMany(mappedBy = "property")
     private List<Contract> contracts;
 
-    @OneToMany(cascade={CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.REFRESH})
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name="postImages")
     private List<Image> postImages;
 

@@ -24,13 +24,11 @@ public class ImageServiceImpl implements ImageService {
         List<Image> imagesPost=new ArrayList<>();
         for (MultipartFile m: postImage ) {
             imagesPost.add(awsService.uploadFile(m));
-
-            //TODO:caso de error guardado de imagen deletear
         }
         LOGGER.warn("Array de amazon creado "+imagesPost.size());
         return imagesPost;
     }
-//TODO:cada multipartfile guar  do en aws, el retorno, genero imagen , guardo y retorno
+
 
 
 }

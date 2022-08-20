@@ -4,13 +4,13 @@ import com.s3.t.model.entity.Image;
 import com.s3.t.model.entity.Property;
 import com.s3.t.model.entity.User;
 import com.s3.t.model.request.PropertyRequest;
+import com.s3.t.model.response.LocationResponse;
 import com.s3.t.model.response.PropertyResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
@@ -27,7 +27,6 @@ public class PropertyMapper {
                 .user(user)
                 .postImages(new ArrayList<>())
                 .price(request.getPrice())
-                .location(null)
                 .build();
     }
     public PropertyResponse responseToProperty(Property p){
@@ -40,6 +39,12 @@ public class PropertyMapper {
                     .description(p.getDescription())
                     .direction(p.getDirection())
                     .price(p.getPrice())
+                    .location(LocationResponse.builder()
+                            .id(p.getLocation().getId())
+                            .country(p.getLocation().getCountry())
+                            .location(p.getLocation().getLocation())
+                            .province(p.getLocation().getProvince())
+                            .build())
                     .imgList(p.getPostImages().stream()
                             .map( i -> imageMapper.imageToDto(i) )
                             .collect(Collectors.toList()))

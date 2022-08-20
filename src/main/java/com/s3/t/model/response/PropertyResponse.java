@@ -22,4 +22,5 @@ public class PropertyResponse implements Serializable {
     private final String lastName;
     private final String telephone;
     private final List<ImageResponse> imgList;
+    private final LocationResponse location;
 }
