@@ -8,7 +8,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,10 +23,26 @@ public class PropertyController {
 
     @ApiOperation(value = "Registration property", notes = "Returns proeprty created" )
     @PostMapping("/add")
-    public ResponseEntity<PropertyResponse> upload(
+    @ResponseStatus(HttpStatus.CREATED)
+    public PropertyResponse upload(
             @RequestPart(value="postimages",required=false) List<MultipartFile> postImage,
             @RequestPart (value="property", required=true) PropertyRequest request){
-        PropertyResponse response = propertyService.add(postImage,request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return propertyService.add(postImage,request);
+    }
+    @GetMapping
+    public List<PropertyResponse> getAllProperty(){
+        return propertyService.getAll();
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@PathVariable Long id, @RequestBody PropertyRequest request){
+        propertyService.update(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Long id) {
+        propertyService.delete(id);
     }
 }

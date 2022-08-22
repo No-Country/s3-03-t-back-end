@@ -1,18 +1,15 @@
 package com.s3.t.service;
 
-import com.s3.t.model.entity.Image;
 import com.s3.t.model.entity.Location;
 import com.s3.t.model.entity.Property;
 import com.s3.t.model.entity.User;
 import com.s3.t.model.mapper.PropertyMapper;
 import com.s3.t.model.request.PropertyRequest;
-import com.s3.t.model.response.LocationResponse;
 import com.s3.t.model.response.PropertyResponse;
 import com.s3.t.repository.ImageRepository;
 import com.s3.t.repository.LocationRepository;
 import com.s3.t.repository.PropertyRepository;
 import com.s3.t.service.abstraction.ImageService;
-import com.s3.t.service.abstraction.LocationService;
 import com.s3.t.service.abstraction.PropertyService;
 import com.s3.t.service.abstraction.UserService;
 import lombok.AllArgsConstructor;
@@ -24,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -58,10 +55,38 @@ public class PropertyServiceImpl implements PropertyService {
         }
         return propertyMapper.responseToProperty( propertyRepository.save(p));
     }
-    private boolean chechListFile(List<MultipartFile>multipartFiles){
+
+    @Override
+    public List<PropertyResponse> getAll() {
+        return propertyRepository.findAll().stream()
+                .map(propertyMapper::dtoToEntity)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public PropertyResponse getById(Long id) {
+       Property p = propertyRepository.findById(id).orElseThrow();
+        return propertyMapper.responseToProperty(p);
+    }
+
+    @Override
+    public void update(Long id, PropertyRequest request) {
+        // TODO document why this method is empty
+    }
+
+    @Override
+    public void delete(Long id) {
+        // TODO document why this method is empty
+    }
+
+
+    private boolean chechListFile(List<MultipartFile>multipartFiles) {
+      if(multipartFiles.isEmpty()){
+          throw new RuntimeException("Debe ingresar al menos un archivo");
+      }
         int c=0;
         for (MultipartFile m: multipartFiles ) {
-            if (m.getOriginalFilename().isEmpty()){
+            if (m.getOriginalFilename().isEmpty()||m.getOriginalFilename()==null){
                 c++;
             }
         }

@@ -2,6 +2,7 @@ package com.s3.t.model.mapper;
 
 import com.s3.t.model.entity.User;
 import com.s3.t.model.request.UserRequest;
+import com.s3.t.model.response.AuthResponse;
 import com.s3.t.model.response.UserResponse;
 import org.springframework.stereotype.Component;
 
@@ -23,10 +24,13 @@ public class UserMapper {
         return user;
     }
 
-    public UserResponse dtoToEntity(User user) {
-        UserResponse response = new UserResponse();
+    public AuthResponse dtoToEntity(User user) {
+        AuthResponse response = new AuthResponse();
         response.setId(user.getId());
         response.setEmail(user.getEmail());
+        response.setFirstName(user.getFirstName());
+        response.setLastName(user.getLastName());
+        response.setRole(user.getRole().getName());
         return response;
 
     }

@@ -8,4 +8,8 @@ import java.util.List;
 
 public interface PropertyService {
     PropertyResponse add(List<MultipartFile> multipartFiles, PropertyRequest request);
+    List<PropertyResponse> getAll();
+    PropertyResponse getById(Long id);
+    void update(Long id,PropertyRequest request);
+    void delete(Long id);
 }

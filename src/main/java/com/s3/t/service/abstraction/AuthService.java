@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public interface AuthService {
-    UserResponse register(UserRequest request);
+    AuthResponse register(UserRequest request);
 
     AuthResponse login(AuthRequest request);
 }
