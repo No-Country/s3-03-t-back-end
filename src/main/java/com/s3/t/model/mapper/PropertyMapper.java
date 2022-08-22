@@ -39,12 +39,12 @@ public class PropertyMapper {
                     .description(p.getDescription())
                     .direction(p.getDirection())
                     .price(p.getPrice())
-                    .location(LocationResponse.builder()
-                            .id(p.getLocation().getId())
-                            .country(p.getLocation().getCountry())
-                            .location(p.getLocation().getLocation())
-                            .province(p.getLocation().getProvince())
-                            .build())
+                   .location(LocationResponse.builder()
+                           .id(p.getId())
+                           .country(p.getLocation().getCountry())
+                           .province(p.getLocation().getProvince())
+                           .location(p.getLocation().getLocation())
+                           .build())
                     .imgList(p.getPostImages().stream()
                             .map( i -> imageMapper.imageToDto(i) )
                             .collect(Collectors.toList()))
@@ -59,6 +59,14 @@ public class PropertyMapper {
                 .price(property.getPrice())
                 .description(property.getDescription())
                 .build();
+
+    }
+    public Property updateToProperty(Property p, PropertyRequest request){
+        p.setAmbient(request.getAmbient());
+        p.setDescription(request.getDescription());
+        p.setDirection(request.getDirection());
+        p.setPrice(request.getPrice());
+        return p;
 
     }
 }

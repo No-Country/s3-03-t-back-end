@@ -24,12 +24,13 @@ public class LocationMapper {
         return location;
     }
     public LocationResponse dtoToEntity(Location location) {
-        LocationResponse response = new LocationResponse();
-        response.setLocation(location.getLocation());
-        response.setCountry(location.getCountry());
-        response.setId(location.getId());
-        response.setProvince(location.getProvince());
-        return response;
+
+        return LocationResponse.builder()
+                .id(location.getId())
+                .location(location.getLocation())
+                .country(location.getCountry())
+                .province(location.getProvince())
+                .build();
 
     }
 
