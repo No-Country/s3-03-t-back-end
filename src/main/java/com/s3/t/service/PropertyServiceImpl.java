@@ -1,12 +1,12 @@
 package com.s3.t.service;
 
+import com.s3.t.exception.InvalidPropertyException;
 import com.s3.t.model.entity.Location;
 import com.s3.t.model.entity.Property;
 import com.s3.t.model.entity.User;
 import com.s3.t.model.mapper.PropertyMapper;
 import com.s3.t.model.request.PropertyRequest;
 import com.s3.t.model.response.PropertyResponse;
-import com.s3.t.repository.ImageRepository;
 import com.s3.t.repository.LocationRepository;
 import com.s3.t.repository.PropertyRepository;
 import com.s3.t.service.abstraction.ImageService;
@@ -31,7 +31,6 @@ public class PropertyServiceImpl implements PropertyService {
     private final UserService userService;
     private final ImageService imageService;
     private final PropertyMapper propertyMapper;
-    private final ImageRepository imageRepository;
     private final LocationRepository locationRepository;
     @Override
     @Transactional
@@ -59,30 +58,55 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public List<PropertyResponse> getAll() {
         return propertyRepository.findAll().stream()
-                .map(propertyMapper::dtoToEntity)
+                .map(propertyMapper::responseToProperty)
                 .collect(Collectors.toList());
     }
 
     @Override
+    @Transactional
     public PropertyResponse getById(Long id) {
-       Property p = propertyRepository.findById(id).orElseThrow();
-        return propertyMapper.responseToProperty(p);
+      try {
+          Property p = getProperty(id);
+          return propertyMapper.responseToProperty(p);
+      }catch (InvalidPropertyException e){
+          throw new RuntimeException("Error upgrade" + e.getMessage());
+      }
+
+    }
+    // TODO:Buscar x id
+    public Property getProperty(Long id){
+           return propertyRepository.findById(id).orElseThrow();
     }
 
     @Override
+    @Transactional
     public void update(Long id, PropertyRequest request) {
-        // TODO document why this method is empty
+     try {
+         Property p = getProperty(id);
+         propertyRepository.save(propertyMapper.updateToProperty(p,request));
+     }catch (RuntimeException e){
+         throw new InvalidPropertyException("Error property update");
+     }
+
+
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
-        // TODO document why this method is empty
+    try {
+        Property p = getProperty(id);
+        p.setSoftDeleted(true);
+        propertyRepository.save(p);
+    }catch (RuntimeException e){
+        throw new InvalidPropertyException("Error delete Property");
+    }
     }
 
 
     private boolean chechListFile(List<MultipartFile>multipartFiles) {
       if(multipartFiles.isEmpty()){
-          throw new RuntimeException("Debe ingresar al menos un archivo");
+          throw new RuntimeException("Debe ingresar almenos un archivo");
       }
         int c=0;
         for (MultipartFile m: multipartFiles ) {

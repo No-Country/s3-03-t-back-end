@@ -29,6 +29,7 @@ public class Property {
     @NotBlank(message = "Direction cannot be empty.")
     private String direction;
 
+    private Boolean softDeleted;
     @ManyToOne(fetch = FetchType.LAZY)
     private Location location;
 

@@ -3,7 +3,6 @@ package com.s3.t.controller;
 import com.s3.t.model.request.AuthRequest;
 import com.s3.t.model.request.UserRequest;
 import com.s3.t.model.response.AuthResponse;
-import com.s3.t.model.response.UserResponse;
 import com.s3.t.service.abstraction.AuthService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

@@ -3,7 +3,6 @@ package com.s3.t.model.mapper;
 import com.s3.t.model.entity.User;
 import com.s3.t.model.request.UserRequest;
 import com.s3.t.model.response.AuthResponse;
-import com.s3.t.model.response.UserResponse;
 import org.springframework.stereotype.Component;
 
 
