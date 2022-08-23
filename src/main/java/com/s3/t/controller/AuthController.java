@@ -3,7 +3,6 @@ package com.s3.t.controller;
 import com.s3.t.model.request.AuthRequest;
 import com.s3.t.model.request.UserRequest;
 import com.s3.t.model.response.AuthResponse;
-import com.s3.t.model.response.UserResponse;
 import com.s3.t.service.abstraction.AuthService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,8 +23,8 @@ public class AuthController {
     private AuthService authService;
     @ApiOperation(value = "Registration method", notes = "Returns a registered user" )
     @PostMapping("/register")
-    public ResponseEntity<UserResponse> register(@Valid @RequestBody UserRequest request){
-        UserResponse response = authService.register(request);
+    public ResponseEntity<AuthResponse> register(@Valid @RequestBody UserRequest request){
+        AuthResponse response = authService.register(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
