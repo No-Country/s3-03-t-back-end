@@ -1,14 +1,17 @@
 package com.s3.t.service;
 
+import com.amazonaws.services.identitymanagement.model.EntityAlreadyExistsException;
 import com.s3.t.exception.InvalidPropertyException;
 import com.s3.t.model.entity.Location;
 import com.s3.t.model.entity.Property;
 import com.s3.t.model.entity.User;
 import com.s3.t.model.mapper.PropertyMapper;
 import com.s3.t.model.request.PropertyRequest;
+import com.s3.t.model.request.PropertyState;
 import com.s3.t.model.response.PropertyResponse;
 import com.s3.t.repository.LocationRepository;
 import com.s3.t.repository.PropertyRepository;
+import com.s3.t.repository.StateRepository;
 import com.s3.t.service.abstraction.ImageService;
 import com.s3.t.service.abstraction.PropertyService;
 import com.s3.t.service.abstraction.UserService;
@@ -32,6 +35,7 @@ public class PropertyServiceImpl implements PropertyService {
     private final ImageService imageService;
     private final PropertyMapper propertyMapper;
     private final LocationRepository locationRepository;
+    private final StateRepository stateRepository;
     @Override
     @Transactional
     public PropertyResponse add(List<MultipartFile> multipartFiles, PropertyRequest request) {
@@ -69,7 +73,7 @@ public class PropertyServiceImpl implements PropertyService {
           Property p = getProperty(id);
           return propertyMapper.responseToProperty(p);
       }catch (InvalidPropertyException e){
-          throw new RuntimeException("Error upgrade" + e.getMessage());
+          throw new EntityAlreadyExistsException("Error upgrade" + e.getMessage());
       }
 
     }
@@ -101,6 +105,20 @@ public class PropertyServiceImpl implements PropertyService {
     }catch (RuntimeException e){
         throw new InvalidPropertyException("Error delete Property");
     }
+    }
+
+    @Override
+    public void patch(Long id, PropertyState request) {
+        Property p = getProperty(id);
+        User user = userService.getInfoUser();
+        try{
+            if (user.getId()==p.getUser().getId()){
+                stateRepository.findByName(request.getState());
+               // propertyRepository.save(p);
+            }
+        }catch (InvalidPropertyException e){
+            throw new RuntimeException("Usuario no autorizado");
+        }
     }
 
 

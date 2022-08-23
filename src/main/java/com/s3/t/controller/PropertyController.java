@@ -1,6 +1,7 @@
 package com.s3.t.controller;
 
 import com.s3.t.model.request.PropertyRequest;
+import com.s3.t.model.request.PropertyState;
 import com.s3.t.model.response.PropertyResponse;
 import com.s3.t.service.PropertyServiceImpl;
 import com.s3.t.service.abstraction.PropertyService;
@@ -51,6 +52,11 @@ public class PropertyController {
         propertyService.update(id, request);
     }
 
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@PathVariable Long id, @RequestBody PropertyState request){
+        propertyService.patch(id, request);
+    }
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable Long id) {

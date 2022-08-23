@@ -18,12 +18,5 @@ import java.io.IOException;
 @RequestMapping("/image")
 
 public class ImageController {
-    @Autowired
-    private AwsService awsService;
-    @PostMapping(value = "/upload")
-    public ResponseEntity<String> uploadFile(@RequestPart(value="file") MultipartFile file) throws IOException {
-        awsService.uploadFile(file);
-        String response = "El archivo "+file.getOriginalFilename()+" fue cargado correctamente a S3";
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
+
 }
