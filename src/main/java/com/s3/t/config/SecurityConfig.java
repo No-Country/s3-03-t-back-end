@@ -56,6 +56,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST,"/property/add").permitAll()
                 .antMatchers(HttpMethod.GET,"/property/").permitAll()
                 .antMatchers(HttpMethod.GET,"/property/{id}").permitAll()
+                .antMatchers(HttpMethod.PATCH,"/property/{id}").permitAll()
                 .antMatchers(HttpMethod.PUT,"/property/{id}").permitAll()
                 .antMatchers(HttpMethod.DELETE,"/property/{id}").permitAll()
                 //Location
