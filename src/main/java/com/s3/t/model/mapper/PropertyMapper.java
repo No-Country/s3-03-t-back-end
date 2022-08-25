@@ -53,7 +53,7 @@ public class PropertyMapper {
                     .smoker(p.getSmoker())
                     .squareMeter(p.getSquareMeter())
                    .location(LocationResponse.builder()
-                           .id(p.getId())
+                           .id(p.getLocation().getId())
                            .country(p.getLocation().getCountry())
                            .province(p.getLocation().getProvince())
                            .location(p.getLocation().getLocation())
