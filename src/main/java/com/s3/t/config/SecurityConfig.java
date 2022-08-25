@@ -49,11 +49,16 @@ public class SecurityConfig {
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth/register").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth/login").permitAll()
-                
+
                 .antMatchers(HttpMethod.POST,"/image/upload").permitAll()
                 .antMatchers(HttpMethod.POST,"/location/save").permitAll()
                 //Property
                 .antMatchers(HttpMethod.POST,"/property/add").permitAll()
+                .antMatchers(HttpMethod.GET,"/property/").permitAll()
+                .antMatchers(HttpMethod.GET,"/property/{id}").permitAll()
+                .antMatchers(HttpMethod.PATCH,"/property/{id}").permitAll()
+                .antMatchers(HttpMethod.PUT,"/property/{id}").permitAll()
+                .antMatchers(HttpMethod.DELETE,"/property/{id}").permitAll()
                 //Location
                 .antMatchers(HttpMethod.GET,"/location/{id}").permitAll()
                 .antMatchers(HttpMethod.GET,"/location/filter").permitAll()

@@ -1,5 +1,6 @@
 package com.s3.t.model.entity;
 
+import com.s3.t.util.PropertyStatus;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -29,6 +30,7 @@ public class Property {
     @NotBlank(message = "Direction cannot be empty.")
     private String direction;
 
+    private Boolean softDeleted;
     @ManyToOne(fetch = FetchType.LAZY)
     private Location location;
 
@@ -37,6 +39,21 @@ public class Property {
 
     @CreationTimestamp
     private Timestamp timestamp;
+
+    @Column(name="status", nullable = false, length = 8 )
+    @Enumerated(value = EnumType.STRING)
+    private PropertyStatus status;
+    @NotNull(message = "Pet cannot be empty.")
+    private Boolean pet;
+    @NotNull(message = "Bath cannot be empty.")
+    private Boolean bath; //baño
+    @NotNull(message = "Furnished cannot be empty.")
+    private Boolean furnished; //amoblado
+    @NotNull(message = "Smoker cannot be empty.")
+    private Boolean smoker; //fumador
+    @NotNull(message = "SquareMeter cannot be empty.")
+    private Integer squareMeter;// fumador
+
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 

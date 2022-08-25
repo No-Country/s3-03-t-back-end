@@ -2,8 +2,11 @@ package com.s3.t.config.seeder;
 
 import com.s3.t.model.entity.Location;
 import com.s3.t.model.entity.Role;
+import com.s3.t.model.entity.State;
 import com.s3.t.repository.LocationRepository;
 import com.s3.t.repository.RoleRepository;
+import com.s3.t.repository.StateRepository;
+import com.s3.t.util.PropertyStatus;
 import com.s3.t.util.RolesEnum;
 import lombok.AllArgsConstructor;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -23,6 +26,7 @@ public class AppSeeder {
 
     private final LocationRepository locationRepository;
     private final RoleRepository roleRepository;
+    private final StateRepository stateRepository;
 
     @EventListener
     public void seed(ContextRefreshedEvent event){
@@ -30,7 +34,9 @@ public class AppSeeder {
         if(roles.isEmpty()){
             createRoles();
         }
-
+        if(stateRepository.findAll().isEmpty()){
+            createState();
+        }
         createLocations();
     }
 
@@ -51,6 +57,19 @@ public class AppSeeder {
     private void createRoles() {
         createRole(1L, RolesEnum.ADMIN);
         createRole(2L, RolesEnum.USER);
+    }
+    private void createState() {
+        createState(1L, PropertyStatus.FREE);
+        createState(2L, PropertyStatus.PROSSES);
+        createState(3L, PropertyStatus.RENTED);
+    }
+
+    private void createState(long l, PropertyStatus e) {
+        State s=new State();
+        s.setId(l);
+        s.setName(e.getName());
+        s.setDescription(e.getName());
+        stateRepository.save(s);
     }
 
     private void createRole(long id, RolesEnum rolesEnum) {

@@ -7,7 +7,6 @@ import com.s3.t.model.mapper.UserMapper;
 import com.s3.t.model.request.AuthRequest;
 import com.s3.t.model.request.UserRequest;
 import com.s3.t.model.response.AuthResponse;
-import com.s3.t.model.response.UserResponse;
 import com.s3.t.repository.UserRepository;
 import com.s3.t.service.abstraction.AuthService;
 import com.s3.t.service.abstraction.RoleService;
@@ -15,7 +14,6 @@ import com.s3.t.util.RolesEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -53,7 +51,7 @@ public class AuthServiceImpl implements AuthService, UserDetailsService {
     }
 
     @Override
-    public UserResponse register(UserRequest request) {
+    public AuthResponse register(UserRequest request) {
         if(userRepository.findByEmail(request.getEmail()) != null){
             throw new UserAlreadyExistException("Email is already in use.");
         }
@@ -61,7 +59,7 @@ public class AuthServiceImpl implements AuthService, UserDetailsService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(roleService.findBy(RolesEnum.USER.getFullRoleName()));
         User userCreate = userRepository.save(user);
-        UserResponse response = userMapper.dtoToEntity(userCreate);
+        AuthResponse response = userMapper.dtoToEntity(userCreate);
         response.setToken(jwtToken.generateToken(userCreate));
         return response;
     }
@@ -70,7 +68,9 @@ public class AuthServiceImpl implements AuthService, UserDetailsService {
     public AuthResponse login(AuthRequest request) {
         User user = getUser(request.getEmail());
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
-        return new AuthResponse(jwtToken.generateToken(user), user.getEmail(), user.getRole().getName(),user.getFirstName(),user.getLastName());
+        AuthResponse a=userMapper.dtoToEntity(user);
+        a.setToken(jwtToken.generateToken(user));
+        return a;
     }
 
 }

@@ -1,4 +1,4 @@
-package com.s3.t.model.response;
+package com.s3.t.model.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,10 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class UserResponse {
-
-    private Long id;
-    private String email;
-    private String firstName;
-    private String lastName;
+public class PropertyState {
+    public String state;
 }
+

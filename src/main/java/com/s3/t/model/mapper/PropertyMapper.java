@@ -7,6 +7,7 @@ import com.s3.t.model.request.PropertyRequest;
 import com.s3.t.model.response.LocationResponse;
 import com.s3.t.model.response.PropertyResponse;
 
+import com.s3.t.util.PropertyStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +28,12 @@ public class PropertyMapper {
                 .user(user)
                 .postImages(new ArrayList<>())
                 .price(request.getPrice())
+                .status(PropertyStatus.FREE)
+                .bath(request.getBath())
+                .pet(request.getPet())
+                .furnished(request.getFurnished())
+                .smoker(request.getSmoker())
+                .squareMeter(request.getSquareMeter())
                 .build();
     }
     public PropertyResponse responseToProperty(Property p){
@@ -39,12 +46,18 @@ public class PropertyMapper {
                     .description(p.getDescription())
                     .direction(p.getDirection())
                     .price(p.getPrice())
-                    .location(LocationResponse.builder()
-                            .id(p.getLocation().getId())
-                            .country(p.getLocation().getCountry())
-                            .location(p.getLocation().getLocation())
-                            .province(p.getLocation().getProvince())
-                            .build())
+                    .status(p.getStatus().name())
+                    .bath(p.getBath())
+                    .pet(p.getPet())
+                    .furnished(p.getFurnished())
+                    .smoker(p.getSmoker())
+                    .squareMeter(p.getSquareMeter())
+                   .location(LocationResponse.builder()
+                           .id(p.getId())
+                           .country(p.getLocation().getCountry())
+                           .province(p.getLocation().getProvince())
+                           .location(p.getLocation().getLocation())
+                           .build())
                     .imgList(p.getPostImages().stream()
                             .map( i -> imageMapper.imageToDto(i) )
                             .collect(Collectors.toList()))
@@ -60,5 +73,17 @@ public class PropertyMapper {
                 .description(property.getDescription())
                 .build();
 
+    }
+    public Property updateToProperty(Property p, PropertyRequest request){
+        p.setAmbient(request.getAmbient());
+        p.setDescription(request.getDescription());
+        p.setDirection(request.getDirection());
+        p.setPrice(request.getPrice());
+        p.setBath(request.getBath());
+        p.setPet(request.getPet());
+        p.setFurnished(request.getFurnished());
+        p.setSmoker(request.getSmoker());
+        p.setSquareMeter(request.getSquareMeter());
+        return p;
     }
 }
