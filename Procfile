@@ -1,0 +1,1 @@
+web: java -jar build/libs/03t-0.0.1-SNAPSHOT.jar
