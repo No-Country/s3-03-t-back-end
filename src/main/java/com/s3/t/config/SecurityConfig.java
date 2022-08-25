@@ -49,6 +49,7 @@ public class SecurityConfig {
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth/register").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth/login").permitAll()
+                .antMatchers(HttpMethod.GET,"/auth/logout").permitAll()
 
                 .antMatchers(HttpMethod.POST,"/image/upload").permitAll()
                 .antMatchers(HttpMethod.POST,"/location/save").permitAll()
