@@ -2,7 +2,6 @@ package com.s3.t.config;
 
 import com.s3.t.service.JwtUtil;
 import io.jsonwebtoken.Claims;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
