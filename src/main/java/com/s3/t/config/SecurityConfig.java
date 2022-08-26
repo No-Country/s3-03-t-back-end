@@ -65,7 +65,8 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET,"/location/filter").permitAll()
                 .antMatchers(HttpMethod.DELETE,"/location/{id}").permitAll()
                 .antMatchers(HttpMethod.PUT,"/location/{id}").permitAll()
-
+                // User
+                .antMatchers(HttpMethod.GET,"/user/{id}").permitAll()
                 // all other requests need to be authenticated
                 .anyRequest().authenticated().and()
                 // make sure we use stateless session; session won't be used to
