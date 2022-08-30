@@ -17,4 +17,6 @@ public class Image {
     private Long id;
     private  String fileName;
     private  String imageUrl;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 }

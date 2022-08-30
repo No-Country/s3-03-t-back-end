@@ -31,6 +31,7 @@ public class Property {
     private String direction;
 
     private Boolean softDeleted;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Location location;
 
