@@ -31,4 +31,5 @@ public class PropertyRequest  {
     @NotBlank(message = "SquareMeter cannot be empty.")
     private Integer squareMeter;
 
+
 }
