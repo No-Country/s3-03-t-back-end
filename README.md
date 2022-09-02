@@ -1,7 +1,7 @@
 # s3-03-t-back-end
 ## Compañero ideal
-<p>Compañero ideal es una app para alquilar piezas para estudiantes que bienen del exterior a estudiar.<br>
-En la app se registrar Usuarios de tipo propietario y inquilino.</p>
+<p>Compañero ideal es una app para alquilar piezas para estudiantes que vienen del exterior a estudiar.<br>
+En la app se registrar Usuarios de tipo propietario e inquilino.</p>
 
 <h3>Back End</h3>
 <ul>
