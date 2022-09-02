@@ -33,8 +33,8 @@ En la app se registrar Usuarios de tipo propietario y inquilino.</p>
 
 <h5>Back End</h5>
 <ul>
-    <li>Abel Acevedo Java Spring Boot :alien: :space_invader:[Abel3581](https://github.com/Abel3581)</li>
-    <li>Gabriel Navarro Java Spring Boot :sunglasses: [gabynavarro](https://github.com/gabynavarro)</li>
+    <li>Abel Acevedo Java Spring Boot :alien: (https://github.com/Abel3581)</li>
+    <li>Gabriel Navarro Java Spring Boot :sunglasses: (https://github.com/gabynavarro)</li>
     <li>Marcos Paz Goncheff Java Spring Boot :relaxed: (https://github.com/marcosep192000)</li>
 </ul>
 
