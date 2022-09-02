@@ -25,123 +25,7 @@ En la app se registrar Usuarios de tipo propietario y inquilino.</p>
 
 <h3>Diseño UX UI</h3>
 <ul>
-<li>Figma</li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <li>Figma</li>
 </ul>
 
 <h4>Diagrama ER</h4>
@@ -149,9 +33,9 @@ En la app se registrar Usuarios de tipo propietario y inquilino.</p>
 
 <h5>Back End</h5>
 <ul>
-<li>Abel Acevedo Back End Java Spring Boot :alien:</li>
-<li>Gabriel Navarro Back End Java Spring Boot :sunglasses:</li>
-<li>Marcos Paz Goncheff :relaxed:</li>
+    <li>Abel Acevedo Java Spring Boot :alien: :space_invader:[Abel3581](https://github.com/Abel3581)</li>
+    <li>Gabriel Navarro Java Spring Boot :sunglasses: [gabynavarro](https://github.com/gabynavarro)</li>
+    <li>Marcos Paz Goncheff Java Spring Boot :relaxed: (https://github.com/marcosep192000)</li>
 </ul>
 
 <h5>Front End</h5>
