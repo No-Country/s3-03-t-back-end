@@ -23,21 +23,147 @@ En la app se registrar Usuarios de tipo propietario y inquilino.</p>
     <li>Font Awesome</li>
 </ul>
 
+<h3>Diseño UX UI</h3>
+<ul>
+<li>Figma</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+
 <h4>Diagrama ER</h4>
 <h1><img src="src/main/resources/static/DiagramaER.png" width="50%"></h1> 
 
-<h5>Equipo Back End</h5>
+<h5>Back End</h5>
 <ul>
 <li>Abel Acevedo Back End Java Spring Boot :alien:</li>
 <li>Gabriel Navarro Back End Java Spring Boot :sunglasses:</li>
 <li>Marcos Paz Goncheff :relaxed:</li>
 </ul>
 
-<h5>Equipo Front End End</h5>
+<h5>Front End</h5>
 <ul>
-<li>Juan Bautista Iglesias:sunglasses: </li>
+    <li>Juan Bautista Iglesias :blush: </li>
 </ul>
 
+<h5>Diseño UX UI :heart_eyes:</h5>
+<ul>
+    <li>Johana Martinez</li>
+    <li>Micaela Macedonio</li>
+</ul>
 
 
 
