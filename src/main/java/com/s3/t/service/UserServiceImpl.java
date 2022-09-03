@@ -3,7 +3,6 @@ package com.s3.t.service;
 import com.s3.t.exception.EntityNotFoundException;
 import com.s3.t.model.entity.User;
 import com.s3.t.model.mapper.UserMapper;
-import com.s3.t.model.request.UserRequest;
 import com.s3.t.model.response.UserResponse;
 import com.s3.t.repository.UserRepository;
 import com.s3.t.service.abstraction.ImageService;
@@ -14,12 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 @Service
 @AllArgsConstructor
